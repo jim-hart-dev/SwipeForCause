@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-coral: #FF6B4A;
+  --color-teal: #0A9B8E;
+  --color-navy: #1A1A2E;
+  --color-cream: #FDF8F4;
+  --font-display: 'Fraunces', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
