@@ -1,10 +1,46 @@
+# Dependencies
 node_modules/
+
+# Environment
 .env
 .env.*
 !.env.example
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.csproj.user
+*.vs/
+*.DotSettings.user
+out/
+
+# Frontend build
+dist/
+.vite/
+
+# Test results
+TestResults/
+coverage/
+playwright-report/
+test-results/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
 Thumbs.db
-*.log
+
+# Azure
 .azure/
-.vscode/
+
+# Claude
 .claude/
+
+# Logs
+*.log
