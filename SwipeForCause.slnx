@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/api/">
+    <Project Path="src/api/SwipeForCause.Api.Tests/SwipeForCause.Api.Tests.csproj" />
+    <Project Path="src/api/SwipeForCause.Api/SwipeForCause.Api.csproj" />
+  </Folder>
+</Solution>
