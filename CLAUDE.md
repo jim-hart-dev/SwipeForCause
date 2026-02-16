@@ -12,14 +12,14 @@ ScrollForCause — a TikTok-style volunteer marketplace connecting nonprofits wi
 
 ```bash
 dotnet build                                    # Build solution
-dotnet run --project SwipeForCause.Api          # Run API (localhost:5000)
-dotnet watch run --project SwipeForCause.Api    # Run with hot reload
+dotnet run --project ScrollForCause.Api          # Run API (localhost:5000)
+dotnet watch run --project ScrollForCause.Api    # Run with hot reload
 dotnet test                                     # Run all xUnit tests
 dotnet test --filter "FullyQualifiedName~ClassName.MethodName"  # Single test
 
 # EF Core migrations (run from src/api/)
-dotnet ef migrations add <Name> --project SwipeForCause.Api
-dotnet ef database update --project SwipeForCause.Api
+dotnet ef migrations add <Name> --project ScrollForCause.Api
+dotnet ef database update --project ScrollForCause.Api
 ```
 
 ### Frontend (React + TypeScript) — from `src/web/`
@@ -46,7 +46,7 @@ Static HTML, no build step. Deployed via Azure Static Web Apps workflow.
 Each feature is a **single file** containing Request, Response, Handler, and Validator. No layered architecture, no interfaces until needed.
 
 ```
-src/api/SwipeForCause.Api/
+src/api/ScrollForCause.Api/
 ├── Program.cs                 # Minimal API setup (EF Core, FluentValidation, CORS, Swagger)
 ├── Features/                  # One folder per domain area, one file per slice
 ├── Database/

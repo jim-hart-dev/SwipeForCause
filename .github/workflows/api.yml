@@ -28,13 +28,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore SwipeForCause.slnx
+        run: dotnet restore ScrollForCause.slnx
 
       - name: Build
-        run: dotnet build SwipeForCause.slnx --configuration Release --no-restore
+        run: dotnet build ScrollForCause.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test SwipeForCause.slnx --configuration Release --no-build --verbosity normal
+        run: dotnet test ScrollForCause.slnx --configuration Release --no-build --verbosity normal
 
   deploy:
     needs: build-and-test
@@ -53,7 +53,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish
-        run: dotnet publish src/api/SwipeForCause.Api/SwipeForCause.Api.csproj --configuration Release --output ./publish
+        run: dotnet publish src/api/ScrollForCause.Api/ScrollForCause.Api.csproj --configuration Release --output ./publish
 
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v3

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ScrollForCause.Api.Tests/ScrollForCause.Api.Tests.csproj" />
+  <Project Path="ScrollForCause.Api/ScrollForCause.Api.csproj" />
+</Solution>
