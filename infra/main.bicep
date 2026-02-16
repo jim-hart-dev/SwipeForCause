@@ -43,8 +43,7 @@ var tags = {
 }
 var postgresAdminUser = 'sfcadmin'
 var postgresDbName = 'swipeforcause'
-var prefix = 'sfc'
-var storageAccountName = '${prefix}storage${environment}'
+var storageAccountName = 'stsfc${environment}'
 
 // ---------------------------------------------------------------------------
 // Module: PostgreSQL

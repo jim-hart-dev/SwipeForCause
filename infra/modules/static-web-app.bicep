@@ -15,8 +15,7 @@ param tags object
 // Variables
 // ---------------------------------------------------------------------------
 
-var prefix = 'sfc'
-var staticWebAppName = '${prefix}-web-${environment}'
+var staticWebAppName = 'stapp-sfc-${environment}'
 
 // ---------------------------------------------------------------------------
 // Static Web App

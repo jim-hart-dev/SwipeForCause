@@ -43,9 +43,8 @@ param sendGridApiKey string
 // Variables
 // ---------------------------------------------------------------------------
 
-var prefix = 'sfc'
-var appServicePlanName = '${prefix}-plan-${environment}'
-var apiAppName = '${prefix}-api-${environment}'
+var appServicePlanName = 'plan-sfc-${environment}'
+var apiAppName = 'app-sfc-api-${environment}'
 
 // ---------------------------------------------------------------------------
 // App Service Plan (F1 Free — upgrade to B1 when needed)

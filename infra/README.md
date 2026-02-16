@@ -2,6 +2,20 @@
 
 Bicep templates that provision the dev/prototype stack using a modular architecture.
 
+## Naming Convention
+
+All resources follow the pattern `{type}-sfc-{component?}-{env}`:
+
+| Resource Type | Pattern | Example |
+|---|---|---|
+| Resource Group | `rg-sfc-{env}` | `rg-sfc-prod` |
+| App Service Plan | `plan-sfc-{env}` | `plan-sfc-prod` |
+| App Service | `app-sfc-{component}-{env}` | `app-sfc-api-prod` |
+| Static Web App | `stapp-sfc-{env}` | `stapp-sfc-prod` |
+| PostgreSQL Server | `db-sfc-{env}` | `db-sfc-prod` |
+| Storage Account | `stsfc{env}` | `stsfcprod` |
+| Key Vault (future) | `kv-sfc-{env}` | `kv-sfc-prod` |
+
 ## File Structure
 
 ```
@@ -32,13 +46,13 @@ az bicep version
 
 ## Resources Provisioned
 
-| Resource | SKU / Tier | Naming Pattern |
-|----------|-----------|----------------|
-| App Service Plan | F1 Free (Linux) | `sfc-plan-{env}` |
-| App Service (.NET 8 API) | — | `sfc-api-{env}` |
-| Static Web App (React) | Free | `sfc-web-{env}` |
-| PostgreSQL Flexible Server | Burstable B1ms, v16, 32 GB | `sfc-pg-{env}` |
-| Storage Account | Standard_LRS, Hot | `sfcstorage{env}` |
+| Resource | SKU / Tier | Name |
+|----------|-----------|------|
+| App Service Plan | F1 Free (Linux) | `plan-sfc-{env}` |
+| App Service (.NET 8 API) | — | `app-sfc-api-{env}` |
+| Static Web App (React) | Free | `stapp-sfc-{env}` |
+| PostgreSQL Flexible Server | Burstable B1ms, v16, 32 GB | `db-sfc-{env}` |
+| Storage Account | Standard_LRS, Hot | `stsfc{env}` |
 | Blob Containers | — | uploads, videos, images, avatars, logos |
 
 ### Not yet provisioned (add when needed)
@@ -47,6 +61,7 @@ These resources were deferred to keep prototype costs low:
 
 - **CDN** — add `modules/cdn.bicep` when media delivery needs caching
 - **Azure Functions** — add `modules/functions.bicep` when media processing is built
+- **Key Vault** — add `modules/keyvault.bicep` to move secrets out of App Service settings
 - **Staging slot** — upgrade App Service to Standard (S1+) tier first
 
 ## Deployment
@@ -61,7 +76,7 @@ az account set --subscription "<YOUR_SUBSCRIPTION_ID>"
 ### 2. Create the resource group
 
 ```bash
-az group create --name sfc-rg-prod --location eastus
+az group create --name rg-sfc-prod --location eastus
 ```
 
 ### 3a. Deploy using the parameter file
@@ -70,7 +85,7 @@ Edit `main.bicepparam` to set your secret values, then:
 
 ```bash
 az deployment group create \
-  --resource-group sfc-rg-prod \
+  --resource-group rg-sfc-prod \
   --template-file infra/main.bicep \
   --parameters infra/main.bicepparam
 ```
@@ -79,7 +94,7 @@ az deployment group create \
 
 ```bash
 az deployment group create \
-  --resource-group sfc-rg-prod \
+  --resource-group rg-sfc-prod \
   --template-file infra/main.bicep \
   --parameters \
     environment=prod \
@@ -93,7 +108,7 @@ az deployment group create \
 
 ```bash
 az deployment group show \
-  --resource-group sfc-rg-prod \
+  --resource-group rg-sfc-prod \
   --name main \
   --query properties.outputs
 ```
@@ -102,7 +117,7 @@ az deployment group show \
 
 ```bash
 az deployment group what-if \
-  --resource-group sfc-rg-prod \
+  --resource-group rg-sfc-prod \
   --template-file infra/main.bicep \
   --parameters infra/main.bicepparam
 ```
@@ -113,16 +128,16 @@ Use separate resource groups per environment:
 
 ```bash
 # Dev
-az group create --name sfc-rg-dev --location eastus
+az group create --name rg-sfc-dev --location eastus
 az deployment group create \
-  --resource-group sfc-rg-dev \
+  --resource-group rg-sfc-dev \
   --template-file infra/main.bicep \
   --parameters environment=dev postgresAdminPassword='...'
 
 # Staging
-az group create --name sfc-rg-staging --location eastus
+az group create --name rg-sfc-staging --location eastus
 az deployment group create \
-  --resource-group sfc-rg-staging \
+  --resource-group rg-sfc-staging \
   --template-file infra/main.bicep \
   --parameters environment=staging postgresAdminPassword='...'
 ```

@@ -25,8 +25,7 @@ param databaseName string = 'swipeforcause'
 // Variables
 // ---------------------------------------------------------------------------
 
-var prefix = 'sfc'
-var serverName = '${prefix}-pg-${environment}'
+var serverName = 'db-sfc-${environment}'
 
 // ---------------------------------------------------------------------------
 // PostgreSQL Flexible Server

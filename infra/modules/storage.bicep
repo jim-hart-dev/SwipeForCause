@@ -15,8 +15,7 @@ param tags object
 // Variables
 // ---------------------------------------------------------------------------
 
-var prefix = 'sfc'
-var storageAccountName = '${prefix}storage${environment}'
+var storageAccountName = 'stsfc${environment}'
 var blobContainers = ['uploads', 'videos', 'images', 'avatars', 'logos']
 
 // ---------------------------------------------------------------------------
