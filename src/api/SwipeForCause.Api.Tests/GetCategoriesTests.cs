@@ -10,6 +10,7 @@ using SwipeForCause.Api.Database.Entities;
 
 namespace SwipeForCause.Api.Tests;
 
+[Collection("Sequential")]
 public class GetCategoriesTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _factory;

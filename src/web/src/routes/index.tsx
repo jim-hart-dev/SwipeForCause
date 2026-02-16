@@ -2,6 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import { SignIn, SignUp } from '@clerk/clerk-react';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
 import VolunteerRegisterPage from '../pages/VolunteerRegisterPage';
+import AdminLayout from '../components/admin/AdminLayout';
+import AdminOrganizationsPage from '../pages/AdminOrganizationsPage';
+import AdminOrgDetailPage from '../pages/AdminOrgDetailPage';
 
 // Placeholder page components
 function PlaceholderPage({ title }: { title: string }) {
@@ -55,6 +58,20 @@ export const router = createBrowserRouter([
       { path: '/org/dashboard', element: <PlaceholderPage title="Org Dashboard" /> },
       { path: '/org/create', element: <PlaceholderPage title="Create Post" /> },
       { path: '/org/content', element: <PlaceholderPage title="Manage Content" /> },
+    ],
+  },
+
+  // Admin routes
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        element: <AdminLayout />,
+        children: [
+          { path: '/admin/organizations', element: <AdminOrganizationsPage /> },
+          { path: '/admin/organizations/:id', element: <AdminOrgDetailPage /> },
+        ],
+      },
     ],
   },
 ]);

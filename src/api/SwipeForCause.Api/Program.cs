@@ -4,8 +4,10 @@ using SwipeForCause.Api.Common;
 using SwipeForCause.Api.Database;
 using SwipeForCause.Api.Features.Auth;
 using SwipeForCause.Api.Features.Categories;
+using SwipeForCause.Api.Features.Moderation;
 using SwipeForCause.Api.Features.Volunteers;
 using SwipeForCause.Api.Infrastructure.Auth;
+using SwipeForCause.Api.Infrastructure.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +53,9 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Email
+builder.Services.AddSingleton<IEmailService, SendGridEmailService>();
+
 // Health checks
 builder.Services.AddHealthChecks();
 
@@ -76,6 +81,9 @@ app.MapHealthChecks("/health");
 app.MapGetMe();
 app.MapRegisterVolunteer();
 app.MapGetCategories();
+app.MapListPendingOrganizations();
+app.MapGetOrganizationDetail();
+app.MapVerifyOrganization();
 
 app.Run();
 
