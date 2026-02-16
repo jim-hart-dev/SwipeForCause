@@ -17,6 +17,7 @@ namespace SwipeForCause.Api.Tests;
 public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     public static string? ClerkUserId { get; set; } = "user_test123";
+    public static string? UserType { get; set; }
 
     public TestAuthHandler(
         IOptionsMonitor<AuthenticationSchemeOptions> options,
@@ -31,11 +32,16 @@ public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions
         if (ClerkUserId is null)
             return Task.FromResult(AuthenticateResult.Fail("No user"));
 
-        var claims = new[]
+        var claims = new List<Claim>
         {
-            new Claim("sub", ClerkUserId),
-            new Claim("email", "test@example.com"),
+            new("sub", ClerkUserId),
+            new("email", "test@example.com"),
         };
+
+        if (UserType is not null)
+        {
+            claims.Add(new Claim("user_type", UserType));
+        }
 
         var identity = new ClaimsIdentity(claims, "TestScheme");
         var principal = new ClaimsPrincipal(identity);
@@ -45,6 +51,7 @@ public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions
     }
 }
 
+[Collection("Sequential")]
 public class RegisterVolunteerTests : IClassFixture<WebApplicationFactory<Program>>, IDisposable
 {
     private readonly WebApplicationFactory<Program> _factory;
@@ -75,12 +82,14 @@ public class RegisterVolunteerTests : IClassFixture<WebApplicationFactory<Progra
 
         // Reset auth state for each test
         TestAuthHandler.ClerkUserId = "user_test123";
+        TestAuthHandler.UserType = null;
     }
 
     public void Dispose()
     {
         // Reset static state
         TestAuthHandler.ClerkUserId = "user_test123";
+        TestAuthHandler.UserType = null;
     }
 
     private HttpClient CreateClient() => _factory.CreateClient();
