@@ -51,3 +51,20 @@ export interface Category {
   slug: string;
   icon: string | null;
 }
+
+export interface Volunteer {
+  volunteerId: string;
+  displayName: string;
+}
+
+export interface RegisterVolunteerRequest {
+  displayName: string;
+  city: string;
+  state: string;
+  categoryIds: string[];
+}
+
+export interface RegisterVolunteerResponse {
+  volunteerId: string;
+  displayName: string;
+}
