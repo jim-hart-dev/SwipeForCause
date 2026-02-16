@@ -32,6 +32,9 @@ export function useGeolocation(): UseGeolocationReturn {
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`,
             { headers: { 'User-Agent': 'SwipeForCause/1.0' } },
           );
+          if (!response.ok) {
+            throw new Error(`Geocoding failed: ${response.status}`);
+          }
           const data = await response.json();
           const address = data.address;
           const result: GeolocationResult = {
