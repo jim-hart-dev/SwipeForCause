@@ -1,7 +1,7 @@
 using './main.bicep'
 
 // =============================================================================
-// SwipeForCause — Production environment parameters
+// ScrollForCause — Production environment parameters
 // =============================================================================
 
 param environment = 'prod'

@@ -19,7 +19,7 @@ param adminUser string = 'sfcadmin'
 param adminPassword string
 
 @description('Name of the application database.')
-param databaseName string = 'swipeforcause'
+param databaseName string = 'scrollforcause'
 
 // ---------------------------------------------------------------------------
 // Variables

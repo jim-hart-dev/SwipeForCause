@@ -93,7 +93,7 @@ Mobile-first: primary viewport 375px–428px.
 
 ## Database
 
-PostgreSQL via EF Core. Dev connection: `Host=localhost;Database=swipeforcause;Username=postgres;Password=postgres`
+PostgreSQL via EF Core. Dev connection: `Host=localhost;Database=scrollforcause;Username=postgres;Password=postgres`
 
 All entities use GUIDs for IDs, UTC ISO 8601 timestamps, and soft deletes (`IsActive` flag).
 

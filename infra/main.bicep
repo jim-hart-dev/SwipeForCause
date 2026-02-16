@@ -1,5 +1,5 @@
 // =============================================================================
-// SwipeForCause MVP — Azure Infrastructure (Orchestration)
+// ScrollForCause MVP — Azure Infrastructure (Orchestration)
 // =============================================================================
 // Provisions Azure resources via modular Bicep templates:
 //   - App Service (.NET 8 API, Free tier)
@@ -38,11 +38,11 @@ param sendGridApiKey string = ''
 // ---------------------------------------------------------------------------
 
 var tags = {
-  project: 'swipeforcause'
+  project: 'scrollforcause'
   environment: environment
 }
 var postgresAdminUser = 'sfcadmin'
-var postgresDbName = 'swipeforcause'
+var postgresDbName = 'scrollforcause'
 var storageAccountName = 'stsfc${environment}'
 
 // ---------------------------------------------------------------------------
