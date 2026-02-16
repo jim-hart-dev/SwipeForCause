@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SwipeForCause.Api.Common;
 using SwipeForCause.Api.Database;
 using SwipeForCause.Api.Features.Auth;
+using SwipeForCause.Api.Features.Categories;
 using SwipeForCause.Api.Features.Volunteers;
 using SwipeForCause.Api.Infrastructure.Auth;
 
@@ -74,6 +75,7 @@ app.UseAuthorization();
 app.MapHealthChecks("/health");
 app.MapGetMe();
 app.MapRegisterVolunteer();
+app.MapGetCategories();
 
 app.Run();
 
