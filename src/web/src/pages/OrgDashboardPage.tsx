@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useOrgDashboard } from '../hooks/useOrgDashboard';
 import RelativeTime from '../components/shared/RelativeTime';
-import type { InterestSummary, PostSummary, SetupChecklist } from '../types';
+import type { InterestSummary, OrgDashboardStats, PostSummary, SetupChecklist } from '../types';
 
 export default function OrgDashboardPage() {
   const { data, isLoading, isError, error } = useOrgDashboard();
@@ -113,8 +113,7 @@ export default function OrgDashboardPage() {
   );
 }
 
-function StatsCards({ stats }: { stats: NonNullable<ReturnType<typeof useOrgDashboard>['data']>['stats'] }) {
-  if (!stats) return null;
+function StatsCards({ stats }: { stats: OrgDashboardStats }) {
 
   const cards = [
     { label: 'New Interests', value: stats.newInterestCount, href: '/org/content' },

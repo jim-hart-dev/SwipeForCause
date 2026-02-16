@@ -80,16 +80,21 @@ public static class GetOrganizationDashboard
                     SetupChecklist: null));
             }
 
-            // Get stats
-            var orgOpportunityIds = await db.Opportunities
-                .Where(o => o.OrganizationId == org.Id && o.Status == "active")
-                .Select(o => o.Id)
+            // Fetch all org opportunities once (used for stats, interests, and checklist)
+            var allOrgOpportunities = await db.Opportunities
+                .Where(o => o.OrganizationId == org.Id)
+                .Select(o => new { o.Id, o.Status })
                 .ToListAsync();
 
-            var newInterestCount = await db.VolunteerInterests
-                .CountAsync(vi => orgOpportunityIds.Contains(vi.OpportunityId) && vi.Status == "pending");
+            var allOrgOpportunityIds = allOrgOpportunities.Select(o => o.Id).ToList();
+            var activeOpportunityCount = allOrgOpportunities.Count(o => o.Status == "active");
+            var activeOpportunityIds = allOrgOpportunities
+                .Where(o => o.Status == "active")
+                .Select(o => o.Id)
+                .ToList();
 
-            var activeOpportunityCount = orgOpportunityIds.Count;
+            var newInterestCount = await db.VolunteerInterests
+                .CountAsync(vi => activeOpportunityIds.Contains(vi.OpportunityId) && vi.Status == "pending");
 
             var stats = new OrgDashboardStats(
                 NewInterestCount: newInterestCount,
@@ -97,11 +102,6 @@ public static class GetOrganizationDashboard
                 FollowerCount: org.FollowerCount);
 
             // Recent interests (latest 5 across all org opportunities)
-            var allOrgOpportunityIds = await db.Opportunities
-                .Where(o => o.OrganizationId == org.Id)
-                .Select(o => o.Id)
-                .ToListAsync();
-
             var recentInterests = await db.VolunteerInterests
                 .Where(vi => allOrgOpportunityIds.Contains(vi.OpportunityId))
                 .OrderByDescending(vi => vi.CreatedAt)
@@ -128,16 +128,10 @@ public static class GetOrganizationDashboard
                     p.CreatedAt))
                 .ToListAsync();
 
-            // Setup checklist
-            var hasOpportunity = await db.Opportunities
-                .AnyAsync(o => o.OrganizationId == org.Id);
-            var hasPost = await db.Posts
-                .AnyAsync(p => p.OrganizationId == org.Id);
-
             var setupChecklist = new SetupChecklist(
                 HasCoverImage: !string.IsNullOrEmpty(org.CoverImageUrl),
-                HasOpportunity: hasOpportunity,
-                HasPost: hasPost);
+                HasOpportunity: allOrgOpportunities.Count > 0,
+                HasPost: recentPosts.Count > 0);
 
             return Results.Ok(new GetOrgDashboardResponse(
                 OrganizationId: org.Id,
