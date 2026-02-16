@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="SwipeForCause.Api.Tests/SwipeForCause.Api.Tests.csproj" />
-  <Project Path="SwipeForCause.Api/SwipeForCause.Api.csproj" />
-</Solution>
