@@ -14,6 +14,8 @@ public static class ClerkAuthExtensions
             .AddJwtBearer(options =>
             {
                 options.Authority = authority;
+                // Clerk session tokens don't include an aud claim by default,
+                // so audience validation would reject all tokens.
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = false,
