@@ -99,7 +99,7 @@ All entities use GUIDs for IDs, UTC ISO 8601 timestamps, and soft deletes (`IsAc
 
 ## Git Workflow
 
-- Feature work in **git worktrees** at `/c/Code/SwipeForCause-wt-{issueNumber}`
+- Feature work in **git worktrees** at `/c/Code/ScrollForCause-wt-{issueNumber}`
 - **Squash merge only** — merge commits and rebase merging are disabled
 - Auto-delete head branches is enabled on GitHub
 - After merge: pull main → remove worktree → delete local branch → rebase remaining feature branches

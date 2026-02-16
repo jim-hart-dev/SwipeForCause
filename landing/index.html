@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ScrollForCause — Find Your Next Volunteer Opportunity in 30 Seconds</title>
 <link rel="icon" href="/fav.ico" type="image/x-icon">
-<meta name="description" content="ScrollForCause is a short-video volunteer marketplace. Nonprofits post short videos, volunteers scroll and sign up with one tap. Launching soon.">
+<meta name="description" content="ScrollForCause is a short-video volunteer marketplace. Social good organizations post short videos, volunteers scroll and sign up with one tap. Launching soon.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
@@ -757,7 +757,7 @@
       Launching Spring 2026
     </div>
     <h1>Scroll Your Feed.<br><span class="highlight">Change Your World.</span></h1>
-    <p class="hero-sub">Nonprofits post short videos about volunteer needs. You scroll, find a cause you care about, and sign up with a single tap.</p>
+    <p class="hero-sub">Social good organizations post short videos about volunteer needs. You scroll, find a cause you care about, and sign up with a single tap.</p>
     <div class="hero-form-wrap">
       <form class="hero-email-form" data-type="volunteer" onsubmit="handleSignup(event)">
         <input type="email" placeholder="Your email address" required aria-label="Email address for volunteer waitlist">
@@ -768,7 +768,7 @@
         You're on the list! We'll be in touch soon.
       </div>
       <div class="hero-form-error" id="error-hero">Something went wrong. Please try again.</div>
-      <p class="hero-nonprofit-link">Are you a nonprofit? <a href="#signup">Sign up here</a></p>
+      <p class="hero-nonprofit-link">Are you a social good organization? <a href="#signup">Sign up here</a></p>
     </div>
   </div>
 </section>
@@ -780,15 +780,15 @@
       <span class="section-label label-problem">The Problem</span>
       <h2>Volunteering is stuck in 2005.</h2>
       <p>You want to help. You really do. But finding opportunities means wading through stale listings on outdated websites, filling out long applications, and hoping someone emails you back in a week.</p>
-      <p>Meanwhile, nonprofits are desperate for volunteers but can't compete for attention in a world of 15-second content. Their mission gets buried under walls of text that nobody reads.</p>
+      <p>Meanwhile, social good organizations are desperate for volunteers but can't compete for attention in a world of 15-second content. Their mission gets buried under walls of text that nobody reads.</p>
       <p>The gap between "I want to help" and "I'm signed up" is way too wide.</p>
     </div>
     <div class="ps-card solution reveal">
       <div class="accent-line"></div>
       <span class="section-label label-solution">The Solution</span>
       <h2>What if finding a cause was as easy as scrolling your feed?</h2>
-      <p>ScrollForCause gives nonprofits the power of short-form video to showcase their mission — and gives you a fast, beautiful way to discover causes that actually resonate.</p>
-      <p>No more job-board listings. No more 10-step applications. Just scroll, watch, feel something, and tap "Volunteer Now." That's it. The nonprofit gets your info and reaches out.</p>
+      <p>ScrollForCause gives social good organizations the power of short-form video to showcase their mission — and gives you a fast, beautiful way to discover causes that actually resonate.</p>
+      <p>No more job-board listings. No more 10-step applications. Just scroll, watch, feel something, and tap "Volunteer Now." That's it. The organization gets your info and reaches out.</p>
       <p>Real organizations. Real impact. One tap away.</p>
     </div>
   </div>
@@ -805,7 +805,7 @@
       <div class="step-icon step-icon-1">📱</div>
       <div class="step-num">01</div>
       <h3>Open & Scroll</h3>
-      <p>A full-screen feed of short videos from verified nonprofits near you. Watch, learn, feel inspired.</p>
+      <p>A full-screen feed of short videos from verified social good organizations near you. Watch, learn, feel inspired.</p>
     </div>
     <div class="step reveal">
       <div class="step-icon step-icon-2">🤝</div>
@@ -817,7 +817,7 @@
       <div class="step-icon step-icon-3">🎉</div>
       <div class="step-num">03</div>
       <h3>Show Up & Help</h3>
-      <p>The nonprofit reaches out with details. You show up, make a difference, and feel great about it.</p>
+      <p>The organization reaches out with details. You show up, make a difference, and feel great about it.</p>
     </div>
   </div>
 </section>
@@ -831,7 +831,7 @@
     </div>
     <div class="stat-item">
       <div class="stat-num">1 in 3</div>
-      <div class="stat-label">Nonprofits struggle to find volunteers</div>
+      <div class="stat-label">Social good orgs struggle to find volunteers</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">30 sec</div>
@@ -865,10 +865,10 @@
     <div class="signup-card nonprofit reveal">
       <span class="card-emoji">🏢</span>
       <h3>I Need Volunteers</h3>
-      <p>Get your nonprofit on ScrollForCause early. Founding organizations get priority placement and setup support.</p>
+      <p>Get your organization on ScrollForCause early. Founding organizations get priority placement and setup support.</p>
       <form class="email-form" data-type="nonprofit" onsubmit="handleSignup(event)">
         <input type="email" placeholder="Your work email" required aria-label="Email address for nonprofit waitlist">
-        <button type="submit">Join as Nonprofit</button>
+        <button type="submit">Join as Organization</button>
       </form>
       <div class="form-success" id="success-nonprofit">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -974,7 +974,7 @@
     } catch (err) {
       errorEl.style.display = 'flex';
       button.disabled = false;
-      button.textContent = (isHero || isFooter) ? 'Join Waitlist' : (type === 'volunteer' ? 'Join Waitlist' : 'Join as Nonprofit');
+      button.textContent = (isHero || isFooter) ? 'Join Waitlist' : (type === 'volunteer' ? 'Join Waitlist' : 'Join as Organization');
     }
   }
 </script>
