@@ -66,7 +66,7 @@ public class GetFeedValidator : AbstractValidator<GetFeedRequest>
         try
         {
             var json = Encoding.UTF8.GetString(Convert.FromBase64String(cursor));
-            var doc = JsonDocument.Parse(json);
+            using var doc = JsonDocument.Parse(json);
             return doc.RootElement.TryGetProperty("createdAt", out var ca)
                 && doc.RootElement.TryGetProperty("postId", out var pi)
                 && DateTime.TryParse(ca.GetString(), out _)
@@ -89,7 +89,7 @@ public static class GetFeed
         try
         {
             var json = Encoding.UTF8.GetString(Convert.FromBase64String(cursor));
-            var doc = JsonDocument.Parse(json);
+            using var doc = JsonDocument.Parse(json);
             var createdAt = DateTime.Parse(doc.RootElement.GetProperty("createdAt").GetString()!).ToUniversalTime();
             var postId = Guid.Parse(doc.RootElement.GetProperty("postId").GetString()!);
             return new CursorPayload(createdAt, postId);
@@ -129,7 +129,7 @@ public static class GetFeed
                 });
             }
 
-            var pageSize = Math.Clamp(limit ?? 10, 1, 20);
+            var pageSize = limit ?? 10;
             var decoded = DecodeCursor(cursor);
 
             var query = db.Posts
@@ -145,7 +145,7 @@ public static class GetFeed
             {
                 query = query.Where(p =>
                     p.CreatedAt < decoded.CreatedAt ||
-                    (p.CreatedAt == decoded.CreatedAt && p.Id.CompareTo(decoded.PostId) < 0));
+                    (p.CreatedAt == decoded.CreatedAt && p.Id < decoded.PostId));
             }
 
             var posts = await query

@@ -332,7 +332,7 @@ public class GetFeedTests : IClassFixture<WebApplicationFactory<Program>>, IDisp
     }
 
     [Fact]
-    public async Task GetFeed_LimitClamped_ToMax20()
+    public async Task GetFeed_LimitExceedsMax_Returns400()
     {
         var client = CreateClient();
         var response = await client.GetAsync("/api/v1/feed?limit=50");
