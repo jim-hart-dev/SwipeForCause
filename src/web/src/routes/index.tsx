@@ -7,6 +7,7 @@ import AdminLayout from '../components/admin/AdminLayout';
 import AdminOrganizationsPage from '../pages/AdminOrganizationsPage';
 import AdminOrgDetailPage from '../pages/AdminOrgDetailPage';
 import OrgDashboardPage from '../pages/OrgDashboardPage';
+import CreateOpportunityPage from '../pages/CreateOpportunityPage';
 
 // Placeholder page components
 function PlaceholderPage({ title }: { title: string }) {
@@ -59,6 +60,7 @@ export const router = createBrowserRouter([
       { path: '/profile', element: <PlaceholderPage title="My Profile" /> },
       { path: '/org/dashboard', element: <OrgDashboardPage /> },
       { path: '/org/create', element: <PlaceholderPage title="Create Post" /> },
+      { path: '/org/opportunities/new', element: <CreateOpportunityPage /> },
       { path: '/org/content', element: <PlaceholderPage title="Manage Content" /> },
     ],
   },

@@ -5,6 +5,7 @@ using ScrollForCause.Api.Database;
 using ScrollForCause.Api.Features.Auth;
 using ScrollForCause.Api.Features.Categories;
 using ScrollForCause.Api.Features.Moderation;
+using ScrollForCause.Api.Features.Opportunities;
 using ScrollForCause.Api.Features.Organizations;
 using ScrollForCause.Api.Features.Volunteers;
 using ScrollForCause.Api.Infrastructure.Auth;
@@ -86,6 +87,7 @@ app.MapListOrganizations();
 app.MapGetOrganizationDetail();
 app.MapVerifyOrganization();
 app.MapGetOrganizationDashboard();
+app.MapCreateOpportunity();
 
 app.Run();
 

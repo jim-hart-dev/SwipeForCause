@@ -157,3 +157,25 @@ export interface OrgDashboardResponse {
   recentPosts: PostSummary[];
   setupChecklist: SetupChecklist | null;
 }
+
+export interface CreateOpportunityRequest {
+  title: string;
+  description: string;
+  locationAddress?: string;
+  isRemote: boolean;
+  latitude?: number;
+  longitude?: number;
+  scheduleType: 'one_time' | 'recurring' | 'flexible';
+  startDate?: string;
+  endDate?: string;
+  recurrenceDesc?: string;
+  volunteersNeeded?: number;
+  timeCommitment?: string;
+  skillsRequired?: string;
+  minimumAge?: number;
+}
+
+export interface CreateOpportunityResponse {
+  opportunityId: string;
+  status: string;
+}
