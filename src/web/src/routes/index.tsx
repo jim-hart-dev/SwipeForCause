@@ -8,6 +8,7 @@ import AdminOrganizationsPage from '../pages/AdminOrganizationsPage';
 import AdminOrgDetailPage from '../pages/AdminOrgDetailPage';
 import OrgDashboardPage from '../pages/OrgDashboardPage';
 import CreateOpportunityPage from '../pages/CreateOpportunityPage';
+import FeedPage from '../pages/FeedPage';
 
 // Placeholder page components
 function PlaceholderPage({ title }: { title: string }) {
@@ -26,7 +27,7 @@ function AuthPage({ children }: { children: React.ReactNode }) {
 
 export const router = createBrowserRouter([
   // Public routes
-  { path: '/', element: <PlaceholderPage title="FYP" /> },
+  { path: '/', element: <FeedPage /> },
   { path: '/explore', element: <PlaceholderPage title="Explore" /> },
   { path: '/org/:id', element: <PlaceholderPage title="Organization" /> },
 
