@@ -101,6 +101,7 @@ export default function FeedContainer() {
             key={item.postId}
             ref={refCallback(index)}
             item={item}
+            index={index}
             isActive={index === activeIndex}
           />
         );

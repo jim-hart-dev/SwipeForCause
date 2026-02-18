@@ -42,7 +42,7 @@ describe('VideoPlayer', () => {
     expect(video.tagName).toBe('VIDEO');
     expect(video).toHaveAttribute('playsinline');
     expect(video.loop).toBe(true);
-    expect(video.muted).toBe(true);
+    expect(video.muted).toBe(false);
   });
 
   it('calls play when isActive becomes true', async () => {
@@ -80,10 +80,10 @@ describe('VideoPlayer', () => {
     const user = userEvent.setup();
     renderPlayer({ isActive: true });
     const video = screen.getByTestId('video-player') as HTMLVideoElement;
-    expect(video.muted).toBe(true);
+    expect(video.muted).toBe(false);
 
     await user.click(screen.getByTestId('video-tap-area'));
-    expect(video.muted).toBe(false);
+    expect(video.muted).toBe(true);
   });
 
   it('shows mute indicator briefly on tap', async () => {
@@ -129,6 +129,30 @@ describe('VideoPlayer', () => {
 
     await user.click(screen.getByTestId('video-retry'));
     expect(screen.queryByTestId('video-error')).not.toBeInTheDocument();
+  });
+
+  it('resets currentTime to 0 when becoming active again', () => {
+    const { rerender } = render(
+      <MuteProvider>
+        <VideoPlayer {...defaultProps} isActive={true} />
+      </MuteProvider>,
+    );
+    const video = screen.getByTestId('video-player') as HTMLVideoElement;
+    // Simulate video having played partway
+    Object.defineProperty(video, 'currentTime', { writable: true, value: 15 });
+
+    // Deactivate then reactivate
+    rerender(
+      <MuteProvider>
+        <VideoPlayer {...defaultProps} isActive={false} />
+      </MuteProvider>,
+    );
+    rerender(
+      <MuteProvider>
+        <VideoPlayer {...defaultProps} isActive={true} />
+      </MuteProvider>,
+    );
+    expect(video.currentTime).toBe(0);
   });
 
   it('shows thumbnail instead of autoplay when prefers-reduced-motion', () => {
