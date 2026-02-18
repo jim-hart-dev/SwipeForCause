@@ -1,6 +1,7 @@
 import { ClerkProvider } from '@clerk/clerk-react';
 import { RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { MuteProvider } from './contexts/MuteContext';
 import { router } from './routes';
 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -22,7 +23,9 @@ export default function App() {
   return (
     <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <MuteProvider>
+          <RouterProvider router={router} />
+        </MuteProvider>
       </QueryClientProvider>
     </ClerkProvider>
   );
