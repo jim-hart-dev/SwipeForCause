@@ -3,14 +3,20 @@ import { createContext, useCallback, useContext, useState, type ReactNode } from
 interface MuteContextValue {
   isMuted: boolean;
   toggleMute: () => void;
+  setMuted: (muted: boolean) => void;
 }
 
 const MuteContext = createContext<MuteContextValue | null>(null);
 
 export function MuteProvider({ children }: { children: ReactNode }) {
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const toggleMute = useCallback(() => setIsMuted((prev) => !prev), []);
-  return <MuteContext.Provider value={{ isMuted, toggleMute }}>{children}</MuteContext.Provider>;
+  const setMuted = useCallback((muted: boolean) => setIsMuted(muted), []);
+  return (
+    <MuteContext.Provider value={{ isMuted, toggleMute, setMuted }}>
+      {children}
+    </MuteContext.Provider>
+  );
 }
 
 export function useMute(): MuteContextValue {

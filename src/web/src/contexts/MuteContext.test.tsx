@@ -14,13 +14,13 @@ function TestConsumer() {
 }
 
 describe('MuteContext', () => {
-  it('defaults to muted', () => {
+  it('defaults to unmuted', () => {
     render(
       <MuteProvider>
         <TestConsumer />
       </MuteProvider>,
     );
-    expect(screen.getByTestId('muted')).toHaveTextContent('true');
+    expect(screen.getByTestId('muted')).toHaveTextContent('false');
   });
 
   it('toggles mute state', async () => {
@@ -31,9 +31,9 @@ describe('MuteContext', () => {
       </MuteProvider>,
     );
     await user.click(screen.getByRole('button', { name: 'toggle' }));
-    expect(screen.getByTestId('muted')).toHaveTextContent('false');
-    await user.click(screen.getByRole('button', { name: 'toggle' }));
     expect(screen.getByTestId('muted')).toHaveTextContent('true');
+    await user.click(screen.getByRole('button', { name: 'toggle' }));
+    expect(screen.getByTestId('muted')).toHaveTextContent('false');
   });
 
   it('throws when used outside provider', () => {

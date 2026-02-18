@@ -44,11 +44,11 @@ function makeFeedItem(overrides: Partial<FeedItemType> = {}): FeedItemType {
   };
 }
 
-function renderFeedItem(item: FeedItemType, isActive = false) {
+function renderFeedItem(item: FeedItemType, isActive = false, index = 0) {
   return render(
     <MemoryRouter>
       <MuteProvider>
-        <FeedItem item={item} isActive={isActive} />
+        <FeedItem item={item} index={index} isActive={isActive} />
       </MuteProvider>
     </MemoryRouter>,
   );

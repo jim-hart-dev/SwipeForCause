@@ -10,7 +10,7 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({ videoUrl, thumbnailUrl, isActive }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { isMuted, toggleMute } = useMute();
+  const { isMuted, toggleMute, setMuted } = useMute();
   const [progress, setProgress] = useState(0);
   const [hasError, setHasError] = useState(false);
   const [showIndicator, setShowIndicator] = useState(false);
@@ -37,11 +37,21 @@ export default function VideoPlayer({ videoUrl, thumbnailUrl, isActive }: VideoP
     if (!video || prefersReducedMotion) return;
 
     if (isActive && !hasError) {
-      video.play().catch(() => setHasError(true));
+      video.currentTime = 0;
+      video.play().catch(() => {
+        if (!video.muted) {
+          // Browser blocked unmuted autoplay — fall back to muted
+          setMuted(true);
+          video.muted = true;
+          video.play().catch(() => setHasError(true));
+        } else {
+          setHasError(true);
+        }
+      });
     } else {
       video.pause();
     }
-  }, [isActive, hasError, prefersReducedMotion, retryKey]);
+  }, [isActive, hasError, prefersReducedMotion, retryKey, setMuted]);
 
   // Track progress
   useEffect(() => {
