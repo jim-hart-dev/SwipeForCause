@@ -18,6 +18,26 @@ export default function FeedContainer() {
     }
   }, [activeIndex, items.length, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  // Preload next video
+  useEffect(() => {
+    const nextItem = items[activeIndex + 1];
+    if (!nextItem || nextItem.mediaType !== 'video' || !nextItem.media[0]) return;
+
+    const url = nextItem.media[0].url;
+    const existing = document.querySelector(`link[rel="preload"][href="${url}"]`);
+    if (existing) return;
+
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'video';
+    link.href = url;
+    document.head.appendChild(link);
+
+    return () => {
+      link.remove();
+    };
+  }, [activeIndex, items]);
+
   const refCallback = useCallback(
     (index: number) => (el: HTMLDivElement | null) => {
       setItemRef(index, el);
