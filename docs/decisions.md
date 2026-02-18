@@ -28,4 +28,5 @@ Secrets and variables configured in **Settings → Secrets and variables → Act
 
 | Variable | Workflow | Purpose |
 |----------|----------|---------|
+| `VITE_API_URL` | `web.yml` | API base URL injected at build time (e.g., `https://app-sfc-api-prod.azurewebsites.net/api/v1`) |
 | `VITE_CLERK_PUBLISHABLE_KEY` | `web.yml` | Clerk publishable key injected at build time for frontend auth |
