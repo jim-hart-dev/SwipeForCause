@@ -23,6 +23,11 @@ public static class SeedData
         using var scope = services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
+        // Skip seeding if migrations haven't been applied yet
+        var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+        if (pendingMigrations.Any())
+            return;
+
         if (await context.Organizations.AnyAsync(o => o.ClerkUserId.StartsWith("seed_")))
             return;
 
