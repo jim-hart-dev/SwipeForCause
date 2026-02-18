@@ -66,6 +66,7 @@ jobs:
         working-directory: src/web
         run: npm run build
         env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
           VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
 
       - name: Deploy to Azure Static Web Apps
